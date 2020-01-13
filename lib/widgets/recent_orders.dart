@@ -8,12 +8,35 @@ class RecentOrders extends StatelessWidget {
       margin: EdgeInsets.all(10.0),
       width: 320.0,
       decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(15.0),
-          border: Border.all(
-            width: 1.0,
-            color: Colors.grey[200],
-          )),
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(15.0),
+        border: Border.all(
+          width: 1.0,
+          color: Colors.grey[200],
+        ),
+      ),
+      child: Row(
+        children: <Widget>[
+          ClipRRect(
+            borderRadius: BorderRadius.circular(15.0),
+            child: Image(
+              height: 100,
+              width: 100,
+              image: AssetImage(order.food.imageUrl),
+              fit: BoxFit.cover,
+            ),
+          ),
+          Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Text(order.food.name),
+              Text(order.restaurant.name),
+              Text(order.date),
+            ],
+          ),
+        ],
+      ),
     );
   }
 
@@ -36,16 +59,17 @@ class RecentOrders extends StatelessWidget {
           ),
         ),
         Container(
-            height: 120.0,
+          height: 120.0,
 //            color: Colors.blue,
-            child: ListView.builder(
-              scrollDirection: Axis.horizontal,
-              itemCount: currentUser.orders.length,
-              itemBuilder: (BuildContext context, int index) {
-                Order order = currentUser.orders[index];
-                return _buildRecentOrder(context, order);
-              },
-            ))
+          child: ListView.builder(
+            scrollDirection: Axis.horizontal,
+            itemCount: currentUser.orders.length,
+            itemBuilder: (BuildContext context, int index) {
+              Order order = currentUser.orders[index];
+              return _buildRecentOrder(context, order);
+            },
+          ),
+        ),
       ],
     );
   }
